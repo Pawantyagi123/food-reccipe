@@ -6,7 +6,7 @@ export default function FoodRecipe({ foodid }) {
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const URL = `https://api.spoonacular.com/recipes/${foodid}/information`;
-  const API_KEY = "9140fbebc4f846ebbab15501b8c1b567";
+  const API_KEY = import.meta.env.VITE_API_KEY; // Use environment variable for API key
 
   useEffect(() => {
     let isMounted = true; // Flag to track component mount status
@@ -36,7 +36,7 @@ export default function FoodRecipe({ foodid }) {
 
   return (
     <>
-      <Link to={"/"} className="backbtn">
+      <Link to="/" className="backbtn">
         <FaArrowLeft /> Back To Home
       </Link>
       <div className="recipecontainer">
@@ -50,8 +50,7 @@ export default function FoodRecipe({ foodid }) {
                 <img src={food.image} alt={food.title} />
                 <div className="points">
                   <span>
-                    <b>Price $</b> {(food.pricePerServing / 100).toFixed(2)} per
-                    serving
+                    <b>Price $</b> {(food.pricePerServing / 100).toFixed(2)} per serving
                   </span>
                   <span>
                     <strong>⏰ {food.readyInMinutes} Minutes</strong>
@@ -68,25 +67,28 @@ export default function FoodRecipe({ foodid }) {
               <div className="ingredients">
                 <h2>Ingredients</h2>
                 <div>
-                  {food.extendedIngredients.map((ingredient) => (
-                    <div className="item" key={ingredient.id}>
-                      <ul>
-                        <li>
-                          {ingredient.name}
-                          <img
-                            src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
-                            alt={ingredient.name}
-                          />
-                        </li>
-                      </ul>
-                    </div>
-                  ))}
+                  {food.extendedIngredients ? (
+                    food.extendedIngredients.map((ingredient) => (
+                      <div className="item" key={ingredient.id}>
+                        <ul>
+                          <li>
+                            {ingredient.name}
+                            <img
+                              src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                              alt={ingredient.name}
+                            />
+                          </li>
+                        </ul>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No ingredients available.</p>
+                  )}
                 </div>
               </div>
               <div className="instruction">
-                <h2>Instruction</h2>
-                {food.analyzedInstructions &&
-                food.analyzedInstructions.length > 0 ? (
+                <h2>Instructions</h2>
+                {food.analyzedInstructions && food.analyzedInstructions.length > 0 ? (
                   food.analyzedInstructions[0].steps.map((step) => (
                     <ul key={step.number}>
                       <li>{step.step}</li>

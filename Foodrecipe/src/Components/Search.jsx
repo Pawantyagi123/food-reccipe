@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const URL = "https://api.spoonacular.com/recipes/complexSearch";
-const API_KEY = "9140fbebc4f846ebbab15501b8c1b567";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export default function Search({ setFoodData, setIsLoading }) {
   const [query, setQuery] = useState(localStorage.getItem('query') || "ice cream");
