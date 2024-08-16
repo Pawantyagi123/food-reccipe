@@ -5,7 +5,7 @@ export default function FoodList({ foodData }) {
   const [foodId, setFoodId] = useState(null);
 
   return (
-    <div>
+    <div className='foodlist'>
       {foodData.map(food => (
         <FoodItem key={food.id} food={food} setFoodId={setFoodId} />
       ))}

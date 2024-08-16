@@ -29,15 +29,14 @@ position: relative;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.532);
     border-radius: 5px;
-    background-color: rgba(250, 235, 215, 0.649);
+    background-color: rgb(243, 240, 236);
     padding: 10px 20px;
    width: 100%;
     outline: none;
-
 }
 
 .app{
-    background-color: rgb(37, 36, 36);
+    background-color: rgb(21, 20, 20);
     color: white;
 }
 
