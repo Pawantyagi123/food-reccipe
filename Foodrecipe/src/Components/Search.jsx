@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
+import { FoodContext } from './FoodContext';
 
-const URL = "https://api.spoonacular.com/recipes/complexSearch";
+const URL = import.meta.env.VITE_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-export default function Search({ setFoodData, setIsLoading }) {
+export default function Search({}) {
+  const { setFoodData, setIsLoading } = useContext(FoodContext)
   const [query, setQuery] = useState(localStorage.getItem('query') || "ice cream");
 
   const handleChange = (e) => {

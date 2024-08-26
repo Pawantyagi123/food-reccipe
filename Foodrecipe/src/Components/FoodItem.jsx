@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FoodContext } from './FoodContext';
 
-export default function FoodItem({ food, setFoodId }) {
-  function handleRecipe() {
-    setFoodId(food.id);
-  }
+export default function FoodItem({ food }) {
+  const { setFoodId } = useContext(FoodContext);
 
   const formatTitle = (title) => {
-    if (!title) return ""; // Return an empty string if title is undefined or null
     return title.length > 15 ? `${title.substring(0, 20)}...` : title;
+  };
+
+  const handleRecipe = () => {
+    setFoodId(food.id); // Using the food id from props
   };
 
   return (
@@ -16,9 +18,12 @@ export default function FoodItem({ food, setFoodId }) {
       <img src={food.image} alt={food.title} />
       <p>{formatTitle(food.title)}</p>
       <div className="btn">
-        <Link to={"/foodrecipe"} onClick={handleRecipe} className='recipebtn'>View Recipe</Link>
+        <Link to={`/foodrecipe/${food.id}`} onClick={handleRecipe} className='recipebtn'>
+          View Recipe
+        </Link>
       </div>
     </div>
   );
 }
+
 

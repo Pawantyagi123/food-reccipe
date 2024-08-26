@@ -7,20 +7,25 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 
 export default function App() {
-  const [foodid, setFoodId] = useState("655098");
-
   return (
     <div className='app'>
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home setFoodId={setFoodId} />} />
-          <Route path='/foodrecipe' element={<FoodRecipe foodid={foodid} />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/foodrecipe/:id' element={<FoodRecipe />} />
         </Routes>
       </Router>
     </div>
   );
 }
+
+
+
+
+
+
+
 
 
 

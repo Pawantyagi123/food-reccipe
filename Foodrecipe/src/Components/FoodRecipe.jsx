@@ -1,38 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { FoodContext } from './FoodContext';
 
-export default function FoodRecipe({ foodid }) {
+export default function FoodRecipe() {
+  const { setFoodId } = useContext(FoodContext);
+  const { id } = useParams(); // Get the recipe ID from the URL
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const URL = `https://api.spoonacular.com/recipes/${foodid}/information`;
-  const API_KEY = import.meta.env.VITE_API_KEY; // Use environment variable for API key
+  const URL = import.meta.env.VITE_RECIPE_URL;
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
-    let isMounted = true; // Flag to track component mount status
+    const foodIdFromURL = id || localStorage.getItem('foodid');
 
-    async function fetchRecipe() {
-      try {
-        const res = await fetch(`${URL}?apiKey=${API_KEY}`);
-        const data = await res.json();
-        if (isMounted) {
-          setFood(data);
-          setIsLoading(false);
+    if (foodIdFromURL) {
+      setFoodId(foodIdFromURL);
+      localStorage.setItem('foodid', foodIdFromURL);
+
+      const savedFood = JSON.parse(localStorage.getItem(`recipe-${foodIdFromURL}`));
+
+      if (savedFood) {
+        setFood(savedFood);
+        setIsLoading(false);
+      } else {
+        async function fetchRecipe() {
+          try {
+            const res = await fetch(`${URL}${foodIdFromURL}/information?apiKey=${API_KEY}`);
+            const data = await res.json();
+            setFood(data);
+            localStorage.setItem(`recipe-${foodIdFromURL}`, JSON.stringify(data)); // Save to localStorage
+            setIsLoading(false);
+          } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+          }
         }
-      } catch (error) {
-        console.log(error);
-        if (isMounted) {
-          setIsLoading(false);
-        }
+
+        fetchRecipe();
       }
     }
-
-    fetchRecipe();
-
-    return () => {
-      isMounted = false; // Cleanup function to set isMounted to false
-    };
-  }, [foodid]);
+  }, [id, setFoodId]);
 
   return (
     <>
@@ -45,7 +53,7 @@ export default function FoodRecipe({ foodid }) {
             <div className="loader"></div>
           ) : (
             <>
-              <div>
+              
                 <h1 className="title">{food.title}</h1>
                 <img src={food.image} alt={food.title} />
                 <div className="points">
@@ -63,14 +71,14 @@ export default function FoodRecipe({ foodid }) {
                   </strong>
                   <span>{food.vegan ? "🐄 Vegan" : ""}</span>
                 </div>
-              </div>
+            
               <div className="ingredients">
-                <h2>Ingredients</h2>
-                <div>
+                <h2>Ingredients:-</h2>
+                <div className="ingredients-list">
                   {food.extendedIngredients ? (
                     food.extendedIngredients.map((ingredient) => (
-                      <div className="item" key={ingredient.id}>
-                        <ul>
+                      
+                        <ul key={ingredient.id}>
                           <li>
                             {ingredient.name}
                             <img
@@ -79,7 +87,7 @@ export default function FoodRecipe({ foodid }) {
                             />
                           </li>
                         </ul>
-                      </div>
+                      
                     ))
                   ) : (
                     <p>No ingredients available.</p>
