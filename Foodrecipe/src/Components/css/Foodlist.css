@@ -27,6 +27,14 @@
     border-bottom-right-radius: 50px;
     border-top-left-radius: 50px;
 }
+.foodlist{  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+ }
 
 .btn{
     margin: 10px auto;
@@ -90,14 +98,7 @@ content: "😋";
 padding-right: 15px;
 }
 
-.foodlist{  
-   display: flex;
-   flex-direction: row;
-   justify-content: start;
-   align-items: center;
-   flex-wrap: wrap;
-   cursor: pointer;
-}
+
 
 .recipebtn{
     text-decoration: none;

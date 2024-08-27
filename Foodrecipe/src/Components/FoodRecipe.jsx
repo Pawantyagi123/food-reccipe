@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import { FoodContext } from './FoodContext';
+import axios from "axios"
 
 export default function FoodRecipe() {
   const { setFoodId, foodid } = useContext(FoodContext);
@@ -18,16 +19,12 @@ export default function FoodRecipe() {
   
         // Check for saved data in localStorage
         const savedFood = localStorage.getItem(`recipe_${id}`);
-        console.log("Saved Recipe in localStorage:", savedFood);
-  
         if (savedFood) {
           setFood(JSON.parse(savedFood));
           setIsLoading(false);
         } else {
-          const res = await fetch(`${URL}${foodid}/information?apiKey=${API_KEY}`);
-          const data = await res.json();
-          console.log("Fetched Recipe Data:", data);
-  
+          const res = await axios.get(`${URL}${foodid}/information?apiKey=${API_KEY}`);
+  const data = res.data
           setFood(data);
           localStorage.setItem(`recipe_${id}`, JSON.stringify(data));
           setIsLoading(false);
