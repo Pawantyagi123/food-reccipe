@@ -15,30 +15,32 @@ export default function FoodRecipe() {
     const getFood = async () => {
       try {
         setIsLoading(true);
-
-        // Check if there's a saved recipe in localStorage
+  
+        // Check for saved data in localStorage
         const savedFood = localStorage.getItem(`recipe_${id}`);
+        console.log("Saved Recipe in localStorage:", savedFood);
+  
         if (savedFood) {
           setFood(JSON.parse(savedFood));
           setIsLoading(false);
         } else {
-          // Fetch the recipe if not found in localStorage
           const res = await fetch(`${URL}${foodid}/information?apiKey=${API_KEY}`);
           const data = await res.json();
+          console.log("Fetched Recipe Data:", data);
+  
           setFood(data);
-
-          // Save the fetched recipe in localStorage
           localStorage.setItem(`recipe_${id}`, JSON.stringify(data));
           setIsLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        console.error("Fetch Error:", error);
         setIsLoading(false);
       }
     };
-
+  
     getFood();
-  }, [id, setFoodId, foodid]);
+  }, [id, foodid]);
+  
 
   return (
     <>
