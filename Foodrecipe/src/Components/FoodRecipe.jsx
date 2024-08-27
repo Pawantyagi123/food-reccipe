@@ -27,7 +27,7 @@ export default function FoodRecipe() {
         async function fetchRecipe() {
           try {
             const res = await fetch(`${URL}${foodid}/information?apiKey=${API_KEY}`);
-            const data = await res.json();
+            const data = await res.json();clear
             setFood(data);
             localStorage.setItem(`recipe-${foodIdFromURL}`, JSON.stringify(data)); // Save to localStorage
             setIsLoading(false);
