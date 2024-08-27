@@ -8,7 +8,7 @@ export default function FoodRecipe() {
   const { id } = useParams(); // Get the recipe ID from the URL
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const URL = "https://api.spoonacular.com/recipes/";
+  const URL = import.meta.env.VITE_RECIPE_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
