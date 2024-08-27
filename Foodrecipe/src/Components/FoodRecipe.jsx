@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { FoodContext } from './FoodContext';
 
 export default function FoodRecipe() {
-  const { setFoodId } = useContext(FoodContext);
+  const { setFoodId,foodid } = useContext(FoodContext);
   const { id } = useParams(); // Get the recipe ID from the URL
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ export default function FoodRecipe() {
       } else {
         async function fetchRecipe() {
           try {
-            const res = await fetch(`${URL}${foodIdFromURL}/information?apiKey=${API_KEY}`);
+            const res = await fetch(`${URL}${foodid}/information?apiKey=${API_KEY}`);
             const data = await res.json();
             setFood(data);
             localStorage.setItem(`recipe-${foodIdFromURL}`, JSON.stringify(data)); // Save to localStorage
