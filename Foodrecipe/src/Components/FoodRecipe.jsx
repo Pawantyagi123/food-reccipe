@@ -16,19 +16,10 @@ export default function FoodRecipe() {
     const getFood = async () => {
       try {
         setIsLoading(true);
-  
-        // Check for saved data in localStorage
-        const savedFood = localStorage.getItem(`recipe_${id}`);
-        if (savedFood) {
-          setFood(JSON.parse(savedFood));
-          setIsLoading(false);
-        } else {
-          const res = await axios.get(`${URL}${foodid}/information?apiKey=${API_KEY}`);
-  const data = res.data
-          setFood(data);
-          localStorage.setItem(`recipe_${id}`, JSON.stringify(data));
-          setIsLoading(false);
-        }
+        const res = await axios.get(`${URL}${foodid}/information?apiKey=${API_KEY}`);
+        const data = res.data
+                setFood(data);
+                setIsLoading(false);
       } catch (error) {
         console.error("Fetch Error:", error);
         setIsLoading(false);
