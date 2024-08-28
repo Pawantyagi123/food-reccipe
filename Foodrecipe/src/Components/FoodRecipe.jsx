@@ -54,7 +54,7 @@ export default function FoodRecipe() {
               <img src={food.image} alt={food.title} />
               <div className="points">
                 <span>
-                  <b>Price $</b> {(food.pricePerServing / 100).toFixed(2)} per serving
+                  <b>Price $</b> {(food.pricePerServing / 100).toFixed(2)} / serving
                 </span>
                 <span>
                   <strong>⏰ {food.readyInMinutes} Minutes</strong>
@@ -63,9 +63,10 @@ export default function FoodRecipe() {
                   <strong>👨‍👩‍👧 {food.servings} Servings</strong>
                 </span>
                 <strong>
+                  <span>
                   {food.vegetarian ? "🟢 Vegetarian" : "🔴 Non-Vegetarian"}
+                  </span>
                 </strong>
-                <span>{food.vegan ? "🐄 Vegan" : ""}</span>
               </div>
               <div className="ingredients">
                 <h2>Ingredients:-</h2>

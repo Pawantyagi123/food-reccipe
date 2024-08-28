@@ -74,9 +74,19 @@
 }
 .points{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 5px;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.points span{
+    background-color: rgba(234, 242, 243, 0.579);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 
 .instruction{
