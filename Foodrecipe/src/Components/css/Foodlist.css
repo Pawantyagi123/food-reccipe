@@ -131,6 +131,9 @@ padding-right: 15px;
     border: 8px solid lightblue;
     border-right-color: orange;
     animation: l2 1s infinite linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @keyframes l2 {to{transform: rotate(1turn)}}
 
@@ -217,4 +220,10 @@ width: 100%;
         width: 50px;
         aspect-ratio: 3/3;
        
+    }
+
+    .error{
+        font-size: 30px;
+        color: rgb(246, 239, 239);
+        text-align: center;
     }

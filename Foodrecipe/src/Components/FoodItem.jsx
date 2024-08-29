@@ -1,16 +1,19 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FoodContext } from './FoodContext';
 
 export default function FoodItem({ food }) {
   const { setFoodId } = useContext(FoodContext);
-
-  const formatTitle = (title) => {
-    return title.length > 15 ? `${title.substring(0, 20)}...` : title;
-  };
+  const navigate = useNavigate();
 
   const handleRecipe = () => {
-    setFoodId(food.id); // Using the food id from props
+    setFoodId(food.id); // Set the food ID correctly
+    navigate(`/foodrecipe/${food.id}`); // Navigate to the recipe page with the correct ID
+  };
+
+  const formatTitle = (title) => {
+    return title.length > 20 ? `${title.substring(0, 20)}...` : title; // Consistent truncation limit
   };
 
   return (
@@ -25,5 +28,3 @@ export default function FoodItem({ food }) {
     </div>
   );
 }
-
-

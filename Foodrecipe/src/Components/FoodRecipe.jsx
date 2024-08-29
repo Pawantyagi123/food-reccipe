@@ -5,7 +5,7 @@ import { FoodContext } from './FoodContext';
 import axios from "axios"
 
 export default function FoodRecipe() {
-  const { setFoodId, foodid } = useContext(FoodContext);
+  const { foodId } = useContext(FoodContext);
   const { id } = useParams(); // Get the recipe ID from the URL
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +23,7 @@ export default function FoodRecipe() {
           setFood(JSON.parse(savedFood));
           setIsLoading(false);
         } else {
-          const res = await axios.get(`${URL}${foodid}/information?apiKey=${API_KEY}`);
+          const res = await axios.get(`${URL}${foodId}/information?apiKey=${API_KEY}`);
   const data = res.data
           setFood(data);
           localStorage.setItem(`recipe_${id}`, JSON.stringify(data));
@@ -36,7 +36,7 @@ export default function FoodRecipe() {
     };
   
     getFood();
-  }, [id, foodid]);
+  }, [id, foodId]);
   
 
   return (

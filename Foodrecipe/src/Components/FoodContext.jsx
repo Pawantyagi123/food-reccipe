@@ -6,12 +6,12 @@ export const FoodContext = createContext();
 
 // Create the provider component
 export const FoodProvider = ({ children }) => {
-  const [foodid, setFoodId] = useState("655098");
+  const [foodId, setFoodId] = useState("655098");
   const [foodData, setFoodData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+const [error, setError] = useState(null)
   return (
-    <FoodContext.Provider value={{ foodid, setFoodId, foodData, setFoodData, isLoading, setIsLoading }}>
+    <FoodContext.Provider value={{ foodId, setFoodId, foodData, setFoodData, isLoading, setIsLoading, error, setError }}>
       {children}
     </FoodContext.Provider>
   );
