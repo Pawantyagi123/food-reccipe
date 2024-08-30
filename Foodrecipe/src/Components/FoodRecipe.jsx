@@ -47,7 +47,7 @@ export default function FoodRecipe() {
       <div className="recipecontainer">
         <div className="foodrecipe">
           {isLoading ? (
-            <div className="loader"></div>
+            <div className="loader" style={{margin:"auto"}}></div>
           ) : (
             <>
               <h1 className="title">{food.title}</h1>
