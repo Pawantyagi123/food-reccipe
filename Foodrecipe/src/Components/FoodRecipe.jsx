@@ -5,7 +5,7 @@ import { FoodContext } from './FoodContext';
 import axios from "axios"
 
 export default function FoodRecipe() {
-  const { foodId } = useContext(FoodContext);
+  const { foodId,error,setError } = useContext(FoodContext);
   const { id } = useParams(); // Get the recipe ID from the URL
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -31,13 +31,22 @@ export default function FoodRecipe() {
         }
       } catch (error) {
         console.error("Fetch Error:", error);
-        setIsLoading(false);
+       setError(error.message  || "Recipe is not found")
+       setIsLoading(false);
+
       }
     };
   
     getFood();
   }, [id, foodId]);
   
+  if(isLoading){
+    return <div className="loader"></div>
+  }
+
+  if(error){
+    return <div className="error">{error}</div>
+  }
 
   return (
     <>

@@ -7,7 +7,8 @@
     text-align: center;
     width: 330px;
     transition: all 0.7s ease-in-out;
-    background-color: rgba(58, 55, 55, 0.603);
+    background-color: #ebe6e66e;
+    backdrop-filter: blur(10px);
     color: rgb(239, 228, 228);
 }
 
@@ -27,6 +28,7 @@
     border-bottom-right-radius: 50px;
     border-top-left-radius: 50px;
 }
+
 .foodlist{  
     display: flex;
     flex-direction: row;
@@ -36,6 +38,7 @@
     cursor: pointer;
  }
 
+ 
 .btn{
     margin: 10px auto;
     display: flex;
@@ -50,16 +53,15 @@
 
 .foodrecipe{
     border-radius: 10px;
-    box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.3);;
+    box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     gap: 10px;
     padding: 20px;
- width: 60%;
  margin: auto;
- background-color: rgb(60, 57, 57);
+ background-color: #374151;
 }
     .innercontainer{
         padding: 10px;
@@ -89,15 +91,6 @@
     font-weight: bold;
 }
 
-.instruction{
-text-align: start;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: start;
-padding-top: 40px;
-}
-
 .instruction li{
     line-height: 35px;
    list-style: none;
@@ -107,7 +100,6 @@ padding-top: 40px;
 content: "😋";
 padding-right: 15px;
 }
-
 
 
 .recipebtn{
@@ -131,9 +123,7 @@ padding-right: 15px;
     border: 8px solid lightblue;
     border-right-color: orange;
     animation: l2 1s infinite linear;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: auto;
   }
   @keyframes l2 {to{transform: rotate(1turn)}}
 
@@ -152,19 +142,18 @@ padding-right: 15px;
 
   @media (max-width:940px){
     .foodrecipe{
-      width: 90%;
+      width: 100%;
+      padding: 10px;
     }
     }
 
-    .ingredients{
-        position: relative;
-        top: 20px;
-        bottom: 20px;
+    .ingredients{  
      display: flex;
      flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 width: 100%;
+gap: 10px;
     }
 
     .ingredients h2{
@@ -189,25 +178,23 @@ width: 100%;
     .ingredients-list{
         display: flex;
         flex-wrap: wrap;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
         gap: 20px;
-       
-      
     }
 
     .ingredients-list li{
         border: none;
         border-radius: 3px;
-        background-color: white;
+        background-color: #94a3b8;
         color: black;
-        width: 160px;
+        width: 180px;
         padding: 10px;
        aspect-ratio: 2/1;
        display: flex;
        justify-content: center;
        align-items: center;
-       gap: 10px;
+       gap: 5px;
        list-style: none;
        overflow: hidden;
     }
